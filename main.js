@@ -28,6 +28,7 @@ searchButton.addEventListener("click", () => {
     console.log("Hi")
     async function getCountry(e) {
 
+        // Het blijkt dus dat ik gewoon .value had moeten typen na de input text
         const response = await axios.get("https://restcountries.eu/rest/v2/name/" + inputText.value);
         const countryINFO = document.getElementById("countryInformation")
         const population = document.getElementById("population")
