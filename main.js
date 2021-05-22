@@ -31,16 +31,22 @@ searchButton.addEventListener("click", () => {
         // Het blijkt dus dat ik gewoon .value had moeten typen na de input text
         const response = await axios.get("https://restcountries.eu/rest/v2/name/" + inputText.value);
         const countryINFO = document.getElementById("countryInformation")
-        const population = document.getElementById("population")
+        const countryDiscription = document.getElementById("countryDiscription")
 
         const createImgTag = document.createElement("img")
         const createParagraphTag = document.createElement("p")
+        const createParagraphTag2 = document.createElement("p")
+        const createParagraphTag3 = document.createElement("p")
         console.log(response)
-        console.log(response.data[0].population)
 
-        createParagraphTag.textContent = "Italy has about: " + response.data[0].population + " residents";
-        createParagraphTag.textContent = "The native name of italy is: " + response.data[0].nativeName;
-        population.appendChild(createParagraphTag)
+        createParagraphTag.textContent = response.data[0].name + " is situated in " + response.data[0].subregion + ". It has about: " + response.data[0].population + " people";
+        countryDiscription.appendChild(createParagraphTag);
+
+        createParagraphTag2.textContent = "The Capital is " + response.data[0].capital + " and you can pay with " + response.data[0].currencies[0].name;
+        countryDiscription.appendChild(createParagraphTag2)
+
+        createParagraphTag3.textContent = "They speak " + response.data[0].languages[].name + "."
+        countryDiscription.appendChild(createParagraphTag3)
 
         createImgTag.src = response.data[0].flag
         countryINFO.appendChild(createImgTag)
@@ -49,8 +55,15 @@ searchButton.addEventListener("click", () => {
     }
     getCountry()
 })
+
+
 // commit line
 
 
 
 // https://restcountries.eu/data/bel.svg
+
+
+// to make:
+// Flag + name
+//
