@@ -21,7 +21,7 @@ console.log(axios)
 
 const searchButton = document.getElementById("requestCountry")
 const inputText = document.getElementById("inputArea")
-const rawinput = inputText.value
+let rawinput = inputText.value
 
 searchButton.addEventListener("click", () => {
     console.log(rawinput)
@@ -29,7 +29,7 @@ searchButton.addEventListener("click", () => {
     async function getCountry(e) {
 
         // Het blijkt dus dat ik gewoon .value had moeten typen na de input text
-        const response = await axios.get("https://restcountries.eu/rest/v2/name/" + inputText.value);
+        const response = await axios.get(`https://restcountries.eu/rest/v2/name/${inputText.value}`);
         const countryINFO = document.getElementById("countryInformation")
         const countryDiscription = document.getElementById("countryDiscription")
 
@@ -39,13 +39,13 @@ searchButton.addEventListener("click", () => {
         const createParagraphTag3 = document.createElement("p")
         console.log(response)
 
-        createParagraphTag.textContent = response.data[0].name + " is situated in " + response.data[0].subregion + ". It has about: " + response.data[0].population + " people";
+        createParagraphTag.textContent = `${response.data[0].name} is situated in ${response.data[0].subregion} . It has about:  ${response.data[0].population}  people"`;
         countryDiscription.appendChild(createParagraphTag);
 
-        createParagraphTag2.textContent = "The Capital is " + response.data[0].capital + " and you can pay with " + response.data[0].currencies[0].name;
+        createParagraphTag2.textContent = `The Capital is ${response.data[0].capital} and you can pay with ${response.data[0].currencies[0].name}`;
         countryDiscription.appendChild(createParagraphTag2)
 
-        createParagraphTag3.textContent = "They speak " + response.data[0].languages[].name + "."
+        createParagraphTag3.textContent = `They speak ${response.data[0].languages[0].name}. `
         countryDiscription.appendChild(createParagraphTag3)
 
         createImgTag.src = response.data[0].flag
